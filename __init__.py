@@ -79,7 +79,7 @@ class Tabularize(object):
         else:
             self.rows.append(list(map(str, row)))
 
-    def generate_table(self) -> None:
+    def generate_table(self, logger=None) -> None:
         self.rows.insert(0, list(map(str, self.column_names)))
         self.row_count = len(self.rows)
         max_width_arr = [max([len(self.rows[y][x]) for y in range(self.row_count)]) for x in range(self.column_count)]
@@ -124,11 +124,14 @@ class Tabularize(object):
         self.final_printable_table_array.append(self.border)  # ** INSERT **
 
         # Call the final printable array function
-        self.print_table()
+        self.print_table(logger)
 
-    def print_table(self) -> None:
+    def print_table(self, logger) -> None:
         final_print = '\n'.join([data_row for data_row in self.final_printable_table_array])
-        print(final_print)
+        if logger:
+            logger.info('\n' + final_print)
+        else:
+            print(final_print)
 
 
 # ---------------------------------------------------------------------------
