@@ -80,8 +80,6 @@ class Tabularize(object):
             self.rows.append(list(map(str, row)))
 
     def generate_table(self, logger=None, _return=False, _print=True) -> str:
-        returnable = ''
-
         self.rows.insert(0, list(map(str, self.column_names)))
         self.row_count = len(self.rows)
         max_width_arr = [max([len(self.rows[y][x]) for y in range(self.row_count)]) for x in range(self.column_count)]

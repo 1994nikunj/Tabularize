@@ -5,7 +5,9 @@
 # With contribution(s) from: Nikunj Sharma
 
 class Tabularize:
-    def __init__(self, field_names, **kwargs):
+    def __init__(self,
+                 field_names: list = None,
+                 **kwargs):
         self.encoding = kwargs.get("encoding", "UTF-8")
         self.final_table = []
 
@@ -32,7 +34,7 @@ class Tabularize:
         # Table borders
         self.table_border_top = ''
 
-    def generate_table(self):
+    def generate_table(self) -> None:
         self.generate_top_border()
         if self.title:
             self.generate_title_column()
@@ -40,18 +42,18 @@ class Tabularize:
         for x in self.final_table:
             print(x)
 
-    def generate_top_border(self):
+    def generate_top_border(self) -> None:
         self.max_width = max([len(str(x)) for x in self.field_names])
         _width = self.max_width + len(self.blank_space) * 2
         _table_border_top = self.junction_char.join([self.horizontal_char * _width for _ in self.field_names])
         self.table_border_top = self.junction_char + _table_border_top + self.junction_char
         self.final_table.append(self.table_border_top)
 
-    def generate_title_column(self):
+    def generate_title_column(self) -> None:
         # To be implemented in future
         pass
 
-    def generate_header_column(self):
+    def generate_header_column(self) -> None:
         temp_column_data = []
         for col in self.field_names:
             padding = self.blank_space * self.padding_width
